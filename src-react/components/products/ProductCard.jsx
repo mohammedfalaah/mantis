@@ -15,7 +15,7 @@ const ProductCard = memo(({ product, onClick }) => {
         <h3 className="product-name">{product.name}</h3>
         <p className="product-meta">{product.material} &bull; {product.sizes[0]}</p>
       </div>
-      <button className="product-btn">View Details</button>
+      <button  className="product-btn">View Details</button>
     </div>
   )
 })

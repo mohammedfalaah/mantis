@@ -12,14 +12,14 @@ const Header = () => {
   const targets = [
     { pathname: '/', hash: '' },
     { pathname: '/shop', hash: '' },
-    { pathname: '/', hash: '#about' },
-    { pathname: '/', hash: '#contact' }
+    { pathname: '/about', hash: '' },
+    { pathname: '/contact', hash: '' }
   ]
 
   const getCurrentIndex = () => {
     if (location.pathname === '/shop') return 1
-    if (location.hash === '#about') return 2
-    if (location.hash === '#contact') return 3
+    if (location.pathname === '/about') return 2
+    if (location.pathname === '/contact') return 3
     return 0
   }
 
@@ -28,20 +28,9 @@ const Header = () => {
     if (index === 0) {
       if (location.pathname === '/') {
         window.scrollTo({ top: 0, behavior: 'smooth' })
-        navigate('/')
       } else {
         navigate('/')
         window.scrollTo(0, 0)
-      }
-    } else if (target.pathname === '/' && target.hash) {
-      if (location.pathname !== '/') {
-        navigate('/' + target.hash)
-      } else {
-        const element = document.querySelector(target.hash)
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' })
-        }
-        navigate(target.hash)
       }
     } else {
       navigate(target.pathname)
@@ -88,23 +77,9 @@ const Header = () => {
     e.preventDefault()
     if (location.pathname === '/') {
       window.scrollTo({ top: 0, behavior: 'smooth' })
-      navigate('/')
     } else {
       navigate('/')
       window.scrollTo(0, 0)
-    }
-  }
-
-  const handleAnchorClick = (e, targetId) => {
-    e.preventDefault()
-    if (location.pathname === '/') {
-      const target = document.querySelector(targetId)
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' })
-      }
-      navigate(targetId)
-    } else {
-      navigate('/' + targetId)
     }
   }
 
@@ -122,27 +97,31 @@ const Header = () => {
           <span>Order Now</span>
           <span>Order Now</span>
           <span>Order Now</span>
+          <span>Order Now</span>
+          <span>Order Now</span>
+          <span>Order Now</span>
+          <span>Order Now</span>
+          
         </div>
       </div>
 
       <header className="global-header" style={{ opacity: 1, display: 'flex' }}>
-        <a href="/" className="logo" style={{ opacity: 1 }} onClick={handleHomeClick}>
+        <Link to="/" className="logo" style={{ opacity: 1 }} onClick={handleHomeClick}>
           <img 
             style={{ height: '80px' }} 
             src="/Screenshot_2026-06-17_at_1.32.38_PM-removebg-preview.png" 
             alt="MANTIS" 
           />
-        </a>
+        </Link>
         
         <nav className="nav-links" style={{ opacity: 1, display: 'flex' }}>
-          <a 
-            href="/" 
-            className={`nav-item ${isActive('/') && !location.hash ? 'active' : ''}`}
-            data-sec="hero"
+          <Link 
+            to="/" 
+            className={`nav-item ${isActive('/') ? 'active' : ''}`}
             onClick={handleHomeClick}
           >
             Home
-          </a>
+          </Link>
           
           <div 
             className="nav-item-dropdown"
@@ -165,11 +144,11 @@ const Header = () => {
             )}
           </div>
           
-          <a href="/#about" className="nav-item" data-sec="about" onClick={(e) => handleAnchorClick(e, '#about')}>About</a>
-          <a href="/#contact" className="nav-item" data-sec="contact" onClick={(e) => handleAnchorClick(e, '#contact')}>Contact</a>
+          <Link to="/about" className={`nav-item ${isActive('/about') ? 'active' : ''}`}>About</Link>
+          <Link to="/contact" className={`nav-item ${isActive('/contact') ? 'active' : ''}`}>Contact</Link>
         </nav>
         
-        <a href="/#contact" className="header-cta" style={{ opacity: 1 }} onClick={(e) => handleAnchorClick(e, '#contact')}>Inquire</a>
+        <Link to="/contact" className="header-cta" style={{ opacity: 1 }}>Inquire</Link>
       </header>
 
       {/* Mobile Glass Bottom Navigation Dock */}
@@ -179,16 +158,16 @@ const Header = () => {
         onTouchEnd={handleTouchEnd}
         onTouchMove={handleTouchMove}
       >
-        <a 
-          href="/" 
-          className={`mobile-nav-item ${isActive('/') && !location.hash ? 'active' : ''}`}
+        <Link 
+          to="/" 
+          className={`mobile-nav-item ${isActive('/') ? 'active' : ''}`}
           data-index={0}
           onClick={handleHomeClick}
         >
           <svg className="mobile-nav-icon" viewBox="0 0 24 24">
             <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
           </svg>
-        </a>
+        </Link>
         
         <Link 
           to="/shop" 
@@ -200,27 +179,25 @@ const Header = () => {
           </svg>
         </Link>
         
-        <a 
-          href="/#about" 
-          className={`mobile-nav-item ${location.hash === '#about' ? 'active' : ''}`}
-          onClick={(e) => handleAnchorClick(e, '#about')}
+        <Link 
+          to="/about" 
+          className={`mobile-nav-item ${isActive('/about') ? 'active' : ''}`}
           data-index={2}
         >
           <svg className="mobile-nav-icon" viewBox="0 0 24 24">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
           </svg>
-        </a>
+        </Link>
         
-        <a 
-          href="/#contact" 
-          className={`mobile-nav-item ${location.hash === '#contact' ? 'active' : ''}`}
-          onClick={(e) => handleAnchorClick(e, '#contact')}
+        <Link 
+          to="/contact" 
+          className={`mobile-nav-item ${isActive('/contact') ? 'active' : ''}`}
           data-index={3}
         >
           <svg className="mobile-nav-icon" viewBox="0 0 24 24">
             <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
           </svg>
-        </a>
+        </Link>
       </nav>
     </>
   )

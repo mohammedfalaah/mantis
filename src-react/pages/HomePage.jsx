@@ -137,6 +137,62 @@ const HomePage = () => {
       }
     )
 
+    // Scroll-triggered split-reveal for Stats section
+    gsap.fromTo('#stats-section .stats-left', 
+      { opacity: 0, x: -80 },
+      {
+        opacity: 1,
+        x: 0,
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '#stats-section',
+          start: 'top 75%',
+          toggleActions: 'play none none none'
+        }
+      }
+    )
+    gsap.fromTo('#stats-section .stats-right', 
+      { opacity: 0, x: 80 },
+      {
+        opacity: 1,
+        x: 0,
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '#stats-section',
+          start: 'top 75%',
+          toggleActions: 'play none none none'
+        }
+      }
+    )
+
+    // GSAP Count-up animation for stats numbers
+    const statItems = document.querySelectorAll('.stat-number-val')
+    statItems.forEach(item => {
+      const targetVal = parseFloat(item.dataset.value)
+      const isFloat = item.dataset.value.includes('.')
+      const suffix = item.dataset.suffix || ''
+      const obj = { val: 0 }
+      gsap.to(obj, {
+        val: targetVal,
+        duration: 2.0,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '#stats-section',
+          start: 'top 75%',
+          toggleActions: 'play none none none'
+        },
+        onUpdate: () => {
+          let formattedVal = isFloat ? obj.val.toFixed(1) : Math.floor(obj.val);
+          if (!isFloat && targetVal >= 1000) {
+            formattedVal = Math.floor(obj.val).toLocaleString();
+          }
+          item.textContent = formattedVal + suffix
+        }
+      })
+    })
+
     // Scroll-triggered split-reveal for Contact section
     gsap.fromTo('#contact .content-column', 
       { opacity: 0, x: -80 },
@@ -328,8 +384,48 @@ const HomePage = () => {
           </div>
         </section>
 
+        {/* Statistics / Trust Section */}
+       
+
         {/* Featured Products Section */}
         <FeaturedProducts />
+         <section id="stats-section" className="scroll-section stats-section">
+          <div className="section-content split-grid" style={{ gap: '40px' }}>
+            <div className="content-column stats-left">
+              <div className="card-tag" style={{ color: '#f39a35', letterSpacing: '0.15em', textTransform: 'uppercase', fontSize: '0.75rem', fontWeight: 600 }}>
+                INDIA'S #1 LOCK MANUFACTURER — JAINSON LOCKS
+              </div>
+              <h2 className="featured-title" style={{ fontSize: '2.5rem', fontWeight: 700, margin: '20px 0 0', color: '#ffffff', lineHeight: 1.2, textAlign: 'left' }}>
+                Premium Main Door Locks for Modern Homes & Businesses
+              </h2>
+            </div>
+            
+            <div className="content-column stats-right" style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
+              <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.95rem', lineHeight: 1.7, margin: 0 }}>
+                For over six decades, Jainson has been redefining security and hardware solutions. With a strong commitment to design, durability, and technology, we bring you premium products that safeguard homes and elevate modern living.
+              </p>
+              
+              <div className="stats-grid">
+                <div className="stat-item">
+                  <span className="stat-number-val" data-value="10" data-suffix="+">0+</span>
+                  <span className="stat-label">Countries</span>
+                </div>
+                <div className="stat-item">
+                  <span className="stat-number-val" data-value="10000" data-suffix="+">0+</span>
+                  <span className="stat-label">Dealers & Distributors</span>
+                </div>
+                <div className="stat-item">
+                  <span className="stat-number-val" data-value="150" data-suffix="+">0+</span>
+                  <span className="stat-label">Builders & Architects</span>
+                </div>
+                <div className="stat-item">
+                  <span className="stat-number-val" data-value="3.4" data-suffix="M+">0M+</span>
+                  <span className="stat-label">Homes</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Smart Technology Section */}
         <section id="smart-tech" className="scroll-section">

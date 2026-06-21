@@ -41,18 +41,22 @@ h6 {
   font-family: var(--font-headings);
 }
 
-html,
-body {
+html {
   width: 100%;
   height: 100%;
+  scroll-behavior: auto;
+}
+
+body {
+  width: 100%;
+  min-height: 100%;
   background-color: var(--color-bg-deep);
   color: var(--color-text-primary);
   font-family: var(--font-body);
   overflow-x: hidden;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
-  scroll-behavior: auto;
-  /* Handled by GSAP scroll control */
+  padding-top: 36px; /* Offset for top fixed announcement bar */
 }
 
 /* Custom Scrollbar for Luxury Look */
@@ -99,7 +103,7 @@ body {
 /* Global Header - Minimal */
 .global-header {
   position: fixed;
-  top: 0;
+  top: 36px; /* Sits below the top fixed announcement bar */
   left: 0;
   width: 100%;
   padding: 16px 40px;
@@ -2422,6 +2426,7 @@ body {
 
 /* --- Scroll-triggered Entrance Animations Initial States --- */
 #lever-gallery .content-column,
+#stats-section .stats-left,
 #smart-tech .image-column,
 #contact .content-column {
   opacity: 0;
@@ -2429,15 +2434,51 @@ body {
 }
 
 #lever-gallery .image-column,
+#stats-section .stats-right,
 #smart-tech .content-column,
 #contact .image-column {
   opacity: 0;
   transform: translateX(80px);
 }
 
+/* --- Stats Section --- */
+.stats-section {
+  padding: 120px 0;
+  background: transparent;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stat-number-val {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1;
+  font-family: var(--font-headings);
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+
 /* --- Mobile Top Announcement Bar (Marquee Loop) --- */
 .mobile-top-announcement {
-  display: none; /* Hidden on desktop */
+  display: flex; /* Always shown on all devices */
   position: fixed;
   top: 0;
   left: 0;
@@ -2472,7 +2513,6 @@ body {
 
 .announcement-track span::after {
   content: '•';
-  margin-left: 30px;
   color: rgba(255, 255, 255, 0.25);
 }
 
@@ -2485,12 +2525,13 @@ body {
   }
 }
 
-@media (max-width: 768px) {
-  .mobile-top-announcement {
-    display: flex;
+/* --- Stats Mobile Responsiveness --- */
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
   }
-  
-  body {
-    padding-top: 36px; /* Offset for top announcement bar on mobile */
+  .stat-number-val {
+    font-size: 2.8rem;
   }
 }
