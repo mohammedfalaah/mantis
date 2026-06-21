@@ -2338,7 +2338,6 @@ body {
 .mobile-bottom-nav {
   display: none;
   position: fixed;
-  bottom: 5px;
   height: 50px;
   left: 50%;
   transform: translateX(-50%);
