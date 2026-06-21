@@ -1,11 +1,63 @@
 import { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const location = useLocation()
+  const navigate = useNavigate()
 
   const isActive = (path) => location.pathname === path
+
+  const targets = [
+    { pathname: '/', hash: '' },
+    { pathname: '/shop', hash: '' },
+    { pathname: '/', hash: '#about' },
+    { pathname: '/', hash: '#contact' }
+  ]
+
+  const getCurrentIndex = () => {
+    if (location.pathname === '/shop') return 1
+    if (location.hash === '#about') return 2
+    if (location.hash === '#contact') return 3
+    return 0
+  }
+
+  const navigateToIndex = (index) => {
+    const target = targets[index]
+    if (target.pathname === '/' && target.hash) {
+      if (location.pathname !== '/') {
+        navigate('/' + target.hash)
+      } else {
+        const element = document.querySelector(target.hash)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' })
+        }
+        navigate(target.hash)
+      }
+    } else {
+      navigate(target.pathname)
+    }
+  }
+
+  const handleTouchMove = (e) => {
+    if (e.cancelable) {
+      e.preventDefault() // Stop page scroll while dragging over nav bar
+    }
+    const touch = e.touches[0]
+    const element = document.elementFromPoint(touch.clientX, touch.clientY)
+    if (element) {
+      const navItem = element.closest('.mobile-nav-item')
+      if (navItem) {
+        const indexAttr = navItem.getAttribute('data-index')
+        if (indexAttr !== null) {
+          const index = parseInt(indexAttr, 10)
+          if (index !== getCurrentIndex()) {
+            navigateToIndex(index)
+          }
+        }
+      }
+    }
+  }
 
   const handleAnchorClick = (e, targetId) => {
     if (location.pathname === '/') {
@@ -66,10 +118,11 @@ const Header = () => {
       </header>
 
       {/* Mobile Glass Bottom Navigation Dock */}
-      <nav className="mobile-bottom-nav">
+      <nav className="mobile-bottom-nav" onTouchMove={handleTouchMove}>
         <Link 
           to="/" 
           className={`mobile-nav-item ${isActive('/') && !location.hash ? 'active' : ''}`}
+          data-index={0}
         >
           <svg className="mobile-nav-icon" viewBox="0 0 24 24">
             <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
@@ -79,6 +132,7 @@ const Header = () => {
         <Link 
           to="/shop" 
           className={`mobile-nav-item ${isActive('/shop') ? 'active' : ''}`}
+          data-index={1}
         >
           <svg className="mobile-nav-icon" viewBox="0 0 24 24">
             <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-8-2h4v2h-4V4zm8 15H4V8h16v11z"/>
@@ -89,6 +143,7 @@ const Header = () => {
           href="/#about" 
           className={`mobile-nav-item ${location.hash === '#about' ? 'active' : ''}`}
           onClick={(e) => handleAnchorClick(e, '#about')}
+          data-index={2}
         >
           <svg className="mobile-nav-icon" viewBox="0 0 24 24">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
@@ -99,6 +154,7 @@ const Header = () => {
           href="/#contact" 
           className={`mobile-nav-item ${location.hash === '#contact' ? 'active' : ''}`}
           onClick={(e) => handleAnchorClick(e, '#contact')}
+          data-index={3}
         >
           <svg className="mobile-nav-icon" viewBox="0 0 24 24">
             <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
