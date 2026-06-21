@@ -54,6 +54,22 @@ const HomePage = () => {
       }
     )
 
+    // Scroll-triggered slide-in for the Smart Technology section text
+    gsap.fromTo('#smart-tech .content-column', 
+      { opacity: 0, x: 120 },
+      {
+        opacity: 1,
+        x: 0,
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '#smart-tech',
+          start: 'top 75%',
+          toggleActions: 'play none none none'
+        }
+      }
+    )
+
     // Initialize scroll animations
     const sections = document.querySelectorAll('.scroll-section')
     const navItems = document.querySelectorAll('.nav-item')

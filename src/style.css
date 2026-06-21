@@ -2338,10 +2338,11 @@ body {
 .mobile-bottom-nav {
   display: none;
   position: fixed;
-  bottom: 24px;
+  bottom: 15px;
+  height: 50px;
   left: 50%;
   transform: translateX(-50%);
-  width: 85%;
+  width: 66%;
   max-width: 380px;
   background: rgba(15, 15, 18, 0.45); /* Dark translucent background */
   backdrop-filter: blur(24px) saturate(180%); /* Premium glassmorphism blur and saturation */
@@ -2414,6 +2415,11 @@ body {
 
 /* --- Scroll-triggered Entrance Animations --- */
 #lever-gallery .image-column {
+  opacity: 0;
+  transform: translateX(120px); /* Pre-shift right for entrance slide-in */
+}
+
+#smart-tech .content-column {
   opacity: 0;
   transform: translateX(120px); /* Pre-shift right for entrance slide-in */
 }
