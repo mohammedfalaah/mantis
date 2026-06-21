@@ -1,0 +1,27 @@
+{
+  "name": "aura-hardware",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:legacy": "vite index-vanilla.html",
+    "build": "vite build",
+    "build:legacy": "vite build index-vanilla.html",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.2",
+    "vite": "^8.0.12"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "gsap": "^3.15.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-router-dom": "^7.18.0",
+    "three": "^0.184.0",
+    "zustand": "^5.0.14"
+  }
+}

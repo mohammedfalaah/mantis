@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scroll Debug Test</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+    
+    .test-container {
+      width: 100%;
+      max-width: 1400px;
+      height: 600px;
+      margin: 0 auto;
+      display: flex;
+      border: 3px solid #333;
+      background: white;
+      overflow: hidden;
+    }
+    
+    .test-sidebar {
+      width: 280px;
+      height: 100%;
+      border-right: 2px solid #e00;
+      background: #ffe0e0;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      padding: 20px;
+      flex-shrink: 0;
+    }
+    
+    .test-main {
+      flex: 1;
+      height: 100%;
+      background: #e0f0ff;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      padding: 20px;
+    }
+    
+    .test-item {
+      padding: 15px;
+      margin-bottom: 10px;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    .scroll-indicator {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #000;
+      color: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+    
+    .scroll-indicator.left-active {
+      background: #e00;
+    }
+    
+    .scroll-indicator.right-active {
+      background: #00e;
+    }
+    
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 6px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+    
+    .instructions {
+      background: #fff3cd;
+      border: 2px solid #ffc107;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+    
+    .instructions h2 {
+      margin-bottom: 10px;
+      color: #856404;
+    }
+    
+    .instructions p {
+      margin: 5px 0;
+      color: #856404;
+    }
+  </style>
+</head>
+<body>
+  <div class="instructions">
+    <h2>🧪 SCROLL TEST</h2>
+    <p><strong>LEFT BOX (RED):</strong> Try scrolling with your mouse wheel</p>
+    <p><strong>RIGHT BOX (BLUE):</strong> Try scrolling with your mouse wheel</p>
+    <p><strong>BOTH SHOULD WORK INDEPENDENTLY!</strong></p>
+    <p>Watch the indicator in the top-right corner to see which side is scrolling.</p>
+  </div>
+
+  <h1>Isolated Scroll Test</h1>
+  
+  <div class="scroll-indicator" id="indicator">
+    Hover and scroll...
+  </div>
+  
+  <div class="test-container">
+    <div class="test-sidebar" id="leftSide">
+      <h3>LEFT SIDEBAR</h3>
+      <div class="test-item">Item 1</div>
+      <div class="test-item">Item 2</div>
+      <div class="test-item">Item 3</div>
+      <div class="test-item">Item 4</div>
+      <div class="test-item">Item 5</div>
+      <div class="test-item">Item 6</div>
+      <div class="test-item">Item 7</div>
+      <div class="test-item">Item 8</div>
+      <div class="test-item">Item 9</div>
+      <div class="test-item">Item 10</div>
+      <div class="test-item">Item 11</div>
+      <div class="test-item">Item 12</div>
+      <div class="test-item">Item 13</div>
+      <div class="test-item">Item 14</div>
+      <div class="test-item">Item 15</div>
+      <div class="test-item">Item 16</div>
+      <div class="test-item">Item 17</div>
+      <div class="test-item">Item 18</div>
+      <div class="test-item">Item 19</div>
+      <div class="test-item">Item 20</div>
+    </div>
+    
+    <div class="test-main" id="rightSide">
+      <h3>RIGHT MAIN AREA</h3>
+      <div class="test-item">Product 1</div>
+      <div class="test-item">Product 2</div>
+      <div class="test-item">Product 3</div>
+      <div class="test-item">Product 4</div>
+      <div class="test-item">Product 5</div>
+      <div class="test-item">Product 6</div>
+      <div class="test-item">Product 7</div>
+      <div class="test-item">Product 8</div>
+      <div class="test-item">Product 9</div>
+      <div class="test-item">Product 10</div>
+      <div class="test-item">Product 11</div>
+      <div class="test-item">Product 12</div>
+      <div class="test-item">Product 13</div>
+      <div class="test-item">Product 14</div>
+      <div class="test-item">Product 15</div>
+      <div class="test-item">Product 16</div>
+      <div class="test-item">Product 17</div>
+      <div class="test-item">Product 18</div>
+      <div class="test-item">Product 19</div>
+      <div class="test-item">Product 20</div>
+    </div>
+  </div>
+
+  <script>
+    const leftSide = document.getElementById('leftSide');
+    const rightSide = document.getElementById('rightSide');
+    const indicator = document.getElementById('indicator');
+    
+    leftSide.addEventListener('mouseenter', () => {
+      indicator.textContent = 'LEFT SIDE (RED) - Try scrolling!';
+      indicator.className = 'scroll-indicator left-active';
+    });
+    
+    rightSide.addEventListener('mouseenter', () => {
+      indicator.textContent = 'RIGHT SIDE (BLUE) - Try scrolling!';
+      indicator.className = 'scroll-indicator right-active';
+    });
+    
+    leftSide.addEventListener('scroll', () => {
+      console.log('LEFT scrolled:', leftSide.scrollTop);
+    });
+    
+    rightSide.addEventListener('scroll', () => {
+      console.log('RIGHT scrolled:', rightSide.scrollTop);
+    });
+  </script>
+</body>
+</html>

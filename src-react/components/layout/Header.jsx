@@ -1,0 +1,112 @@
+import { useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+
+const Header = () => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const location = useLocation()
+
+  const isActive = (path) => location.pathname === path
+
+  const handleAnchorClick = (e, targetId) => {
+    if (location.pathname === '/') {
+      e.preventDefault()
+      const target = document.querySelector(targetId)
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+  }
+
+  return (
+    <>
+      <header className="global-header" style={{ opacity: 1, display: 'flex' }}>
+        <Link to="/" className="logo" style={{ opacity: 1 }}>
+          <img 
+            style={{ height: '80px' }} 
+            src="/Screenshot_2026-06-17_at_1.32.38_PM-removebg-preview.png" 
+            alt="MANTIS" 
+          />
+        </Link>
+        
+        <nav className="nav-links" style={{ opacity: 1, display: 'flex' }}>
+          <Link 
+            to="/" 
+            className={`nav-item ${isActive('/') ? 'active' : ''}`}
+            data-sec="hero"
+          >
+            Home
+          </Link>
+          
+          <div 
+            className="nav-item-dropdown"
+            onMouseEnter={() => setIsDropdownOpen(true)}
+            onMouseLeave={() => setIsDropdownOpen(false)}
+          >
+            <Link to="/shop" className={`nav-item ${isActive('/shop') ? 'active' : ''}`}>
+              Shop ▾
+            </Link>
+            {isDropdownOpen && (
+              <div className="dropdown-menu">
+                <Link to="/shop" className="dropdown-item">All Products</Link>
+                <Link to="/shop?category=pull-handles" className="dropdown-item">Pull Handles</Link>
+                <Link to="/shop?category=lever-handles" className="dropdown-item">Lever Handles</Link>
+                <Link to="/shop?category=smart-locks" className="dropdown-item">Smart Locks</Link>
+                <Link to="/shop?category=door-hinges" className="dropdown-item">Door Hinges</Link>
+                <Link to="/shop?category=door-closers" className="dropdown-item">Door Closers</Link>
+                <Link to="/shop?category=accessories" className="dropdown-item">Accessories</Link>
+              </div>
+            )}
+          </div>
+          
+          <a href="#about" className="nav-item" data-sec="about">About</a>
+          <a href="#contact" className="nav-item" data-sec="contact">Contact</a>
+        </nav>
+        
+        <a href="#contact" className="header-cta" style={{ opacity: 1 }}>Inquire</a>
+      </header>
+
+      {/* Mobile Glass Bottom Navigation Dock */}
+      <nav className="mobile-bottom-nav">
+        <Link 
+          to="/" 
+          className={`mobile-nav-item ${isActive('/') && !location.hash ? 'active' : ''}`}
+        >
+          <svg className="mobile-nav-icon" viewBox="0 0 24 24">
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+          </svg>
+        </Link>
+        
+        <Link 
+          to="/shop" 
+          className={`mobile-nav-item ${isActive('/shop') ? 'active' : ''}`}
+        >
+          <svg className="mobile-nav-icon" viewBox="0 0 24 24">
+            <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-8-2h4v2h-4V4zm8 15H4V8h16v11z"/>
+          </svg>
+        </Link>
+        
+        <a 
+          href="/#about" 
+          className={`mobile-nav-item ${location.hash === '#about' ? 'active' : ''}`}
+          onClick={(e) => handleAnchorClick(e, '#about')}
+        >
+          <svg className="mobile-nav-icon" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+          </svg>
+        </a>
+        
+        <a 
+          href="/#contact" 
+          className={`mobile-nav-item ${location.hash === '#contact' ? 'active' : ''}`}
+          onClick={(e) => handleAnchorClick(e, '#contact')}
+        >
+          <svg className="mobile-nav-icon" viewBox="0 0 24 24">
+            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+        </a>
+      </nav>
+    </>
+  )
+}
+
+export default Header

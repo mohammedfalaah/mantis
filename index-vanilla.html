@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MANTIS — Ultimate Hardware Fittings</title>
+  <meta name="description"
+    content="Immersive 3D gallery showcasing precision-engineered door handles, pull handles, and biometric locking systems. Matte black, brushed steel, and antique gold hardware sculpted in anti-gravity.">
+  <script>
+    window.addEventListener('error', function (e) {
+      var errorDiv = document.createElement('div');
+      errorDiv.id = 'debug-error-banner';
+      errorDiv.style.position = 'fixed';
+      errorDiv.style.bottom = '10px';
+      errorDiv.style.left = '10px';
+      errorDiv.style.padding = '20px';
+      errorDiv.style.background = 'rgba(255, 0, 0, 0.9)';
+      errorDiv.style.color = 'white';
+      errorDiv.style.zIndex = '99999';
+      errorDiv.style.fontFamily = 'monospace';
+      errorDiv.style.whiteSpace = 'pre-wrap';
+      errorDiv.style.borderRadius = '8px';
+      errorDiv.style.maxWidth = '90vw';
+      errorDiv.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)';
+      errorDiv.innerHTML = '<strong>JS Error:</strong> ' + e.message + '<br><small>at ' + e.filename + ':' + e.lineno + '</small>';
+      document.body.appendChild(errorDiv);
+    });
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Critical loading styles */
+    body {
+      background-color: #ffffff;
+      color: #000000;
+      margin: 0;
+      overflow-x: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #ffffff;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.6s ease;
+      pointer-events: none;
+    }
+
+    #loading-screen.hide {
+      opacity: 0;
+      display: none;
+    }
+
+    .loader-title {
+      font-size: 2rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+      color: #000000;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeInUp 0.8s forwards 0.1s;
+    }
+
+    .loader-bar-bg {
+      width: 160px;
+      height: 1px;
+      background: rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .loader-bar-fill {
+      width: 0%;
+      height: 100%;
+      background: #000000;
+      position: absolute;
+      left: 0;
+      top: 0;
+      transition: width 0.3s ease;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Immersive Loading Screen -->
+  <div id="loading-screen">
+    <div class="loader-title"><img style="height: 80px;"
+        src="/Screenshot_2026-06-17_at_1.32.38_PM-removebg-preview.png" alt=""></div>
+    <div class="loader-bar-bg">
+      <div class="loader-bar-fill" id="loader-fill"></div>
+    </div>
+  </div>
+
+
+  <!-- Luxury Global Header -->
+  <header class="global-header" style="opacity: 1 !important; display: flex !important;">
+    <a href="/index.html" class="logo" style="opacity: 1 !important;"><img style="height: 80px;"
+        src="/Screenshot_2026-06-17_at_1.32.38_PM-removebg-preview.png" alt=""></a>
+    <nav class="nav-links" style="opacity: 1 !important; display: flex !important;">
+      <a href="/index.html" class="nav-item active" data-sec="hero">Home</a>
+      <div class="nav-item-dropdown">
+        <a href="/shop.html" class="nav-item">Shop ▾</a>
+        <div class="dropdown-menu">
+          <a href="/shop.html" class="dropdown-item">All Products</a>
+          <a href="/shop.html?category=pull-handles" class="dropdown-item">Pull Handles</a>
+          <a href="/shop.html?category=lever-handles" class="dropdown-item">Lever Handles</a>
+          <a href="/shop.html?category=smart-locks" class="dropdown-item">Smart Locks</a>
+          <a href="/shop.html?category=door-hinges" class="dropdown-item">Door Hinges</a>
+          <a href="/shop.html?category=door-closers" class="dropdown-item">Door Closers</a>
+          <a href="/shop.html?category=accessories" class="dropdown-item">Accessories</a>
+        </div>
+      </div>
+      <a href="#about" class="nav-item" data-sec="about">About</a>
+      <a href="#contact" class="nav-item" data-sec="contact">Contact</a>
+    </nav>
+    <a href="#contact" class="header-cta" style="opacity: 1 !important;">Inquire</a>
+  </header>
+
+
+
+  <!-- Scroll-driven Sections Container -->
+  <main class="scroll-container">
+
+    <!-- Section 1: Hero -->
+    <section id="hero" class="scroll-section active hero-banner" style="opacity: 1 !important;">
+      <div class="hero-banner-image">
+        <img src="/ChatGPT Image Jun 20, 2026, 02_55_39 PM.png" alt="MANTIS Hardware Collection" />
+      </div>
+      <div class="hero-banner-overlay">
+        <div class="hero-banner-content">
+          <div class="hero-text-animated">
+            <h1 class="hero-main-title">
+              <span class="text-line"><span>Hardware that</span></span>
+              <span class="text-line text-highlight"><span>Completes Perfection.</span></span>
+            </h1>
+            <p class="hero-subtitle">
+              <span class="subtitle-line">Premium quality. Timeless design.</span>
+              <span class="subtitle-line">Trusted by millions across India.</span>
+            </p>
+          </div>
+          <div class="hero-cta-section">
+            <a href="/shop.html" class="hero-btn-primary">Explore Collection</a>
+            <a href="#about" class="hero-btn-secondary">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 1.5: About -->
+    <section id="about" class="scroll-section">
+      <div class="section-content split-grid">
+        <div class="content-column">
+          <div class="interactive-card glass-panel">
+            <div class="card-tag">About Mantis</div>
+            <h2 class="card-title">Crafting Security. Elevating Spaces</h2>
+            <p class="card-desc">
+              Mantis is a leading door locks and architectural hardware brand in India,
+              dedicated to creating premium solutions that combine security, durability,
+              and timeless design. Every product is engineered with precision and crafted
+              using high-quality materials to deliver exceptional performance for modern
+              homes, commercial spaces, and luxury interiors.
+            </p>
+            <div class="spec-grid">
+              <div class="spec-grid-item">
+                <span class="grid-label">Industry Focus</span>
+                <span class="grid-value">Door Hardware</span>
+              </div>
+
+              <div class="spec-grid-item">
+                <span class="grid-label">Product Range</span>
+                <span class="grid-value">50+ Categories</span>
+              </div>
+
+              <div class="spec-grid-item">
+                <span class="grid-label">Core Values</span>
+                <span class="grid-value">Quality & Trust</span>
+              </div>
+
+              <div class="spec-grid-item">
+                <span class="grid-label">Applications</span>
+                <span class="grid-value">Residential & Commercial</span>
+              </div>
+            </div>
+
+            <div class="card-ctas">
+              <button class="card-action-btn">
+                Explore Collection
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="image-column">
+          <div class="about-image-wrapper">
+            <img src="/handle_ss.png" alt="M-472 Lever Handle" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Featured Products -->
+    <section id="featured-products" class="scroll-section featured-section">
+      <div class="section-content featured-content">
+        <div class="featured-header">
+          <div class="card-tag text-highlight"
+            style="font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;">Next-Gen Hardware</div>
+          <h2 class="featured-title creative-title">Featured <span class="thin-accent">Products</span></h2>
+          <div class="header-divider"></div>
+          <p class="featured-subtitle">Sculpted in anti-gravity. Engineered for tomorrow's architecture.</p>
+        </div>
+
+        <div class="featured-grid" id="featured-products-grid">
+          <!-- Products will be dynamically loaded here -->
+        </div>
+
+        <div class="featured-cta">
+          <a href="/shop.html" class="featured-btn-view-all">View All Products</a>
+        </div>
+      </div>
+    </section>
+
+  
+
+    <!-- Section 5: Smart Technology -->
+    <section id="smart-tech" class="scroll-section">
+      <div class="section-content split-grid">
+        <div class="image-column">
+          <img src="/helios_smart_lock.png" alt="Helios Smart Lock" />
+        </div>
+        <div class="content-column">
+          <div class="interactive-card glass-panel">
+            <div class="card-tag">Biometric Security</div>
+            <h2 class="card-title">HELIOS SMART LOCK</h2>
+            <p class="card-desc">
+              Security concealed within minimalist elegance. A black glass faceplate integrated with state-of-the-art
+              biometrics, dynamic numeric keypad, and close-proximity Bluetooth.
+            </p>
+            <ul class="spec-list">
+              <li><strong>Biometric Sensor:</strong> Hidden capacitive reader with 0.15s identification speed.</li>
+              <li><strong>OLED Panel:</strong> Micro-perforated numbers appearing through black brushed metal only when
+                active.</li>
+              <li><strong>Fail-Safe:</strong> Hidden mechanical key cylinder behind pivot-cover and emergency USB-C
+                bypass.</li>
+            </ul>
+            <div class="card-ctas">
+              <button class="card-action-btn select-product-btn" data-product="smart">Inspect Features</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Section 7: Contact / Inquiry Form -->
+    <section id="contact" class="scroll-section">
+      <div class="section-content split-grid">
+        <div class="content-column">
+          <div class="interactive-card glass-panel contact-card">
+            <div class="card-tag">Get in Touch</div>
+            <h2 class="card-title">Inquire for Projects</h2>
+            <form class="contact-form" id="main-contact-form">
+              <div class="form-group">
+                <input type="text" id="contact-name" placeholder="Your Name" required />
+              </div>
+              <div class="form-group">
+                <input type="email" id="contact-email" placeholder="Your Email" required />
+              </div>
+              <div class="form-group">
+                <textarea id="contact-message" rows="4" placeholder="Describe your project requirements..." required></textarea>
+              </div>
+              <button type="submit" class="card-action-btn">Submit Inquiry</button>
+            </form>
+          </div>
+        </div>
+        <div class="image-column">
+          <img src="/ChatGPT Image Jun 20, 2026, 04_06_31 PM.png" alt="Mantis Project Inquiry" />
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Scroll Progress Pips -->
+  <div class="scroll-pip-tracker">
+    <div class="pip active" data-sec="hero">
+      <span class="pip-label">Home</span>
+    </div>
+    <div class="pip" data-sec="about">
+      <span class="pip-label">About</span>
+    </div>
+    <div class="pip" data-sec="featured-products">
+      <span class="pip-label">Featured</span>
+    </div>
+    <div class="pip" data-sec="catalog">
+      <span class="pip-label">Catalog</span>
+    </div>
+    <div class="pip" data-sec="smart-tech">
+      <span class="pip-label">Technology</span>
+    </div>
+    <div class="pip" data-sec="contact">
+      <span class="pip-label">Contact</span>
+    </div>
+  </div>
+
+  <!-- E-Commerce Product Spec Sheet Drawer -->
+  <div class="spec-drawer-overlay" id="product-drawer-overlay">
+    <div class="spec-drawer">
+      <button class="close-drawer-btn" id="close-drawer-btn">&times;</button>
+      <div class="drawer-scroll-content">
+        <div class="drawer-header">
+          <span class="drawer-category" id="drawer-category">Category</span>
+          <h2 class="drawer-title" id="drawer-title">Product Title</h2>
+          <div class="drawer-subcategory" id="drawer-subcategory">Subcategory</div>
+        </div>
+        <div class="drawer-image-frame">
+          <img id="drawer-image" src="" alt="" />
+          <div class="image-blueprint-overlay"></div>
+        </div>
+        <div class="drawer-description-group">
+          <span class="section-label">Description</span>
+          <p class="drawer-desc" id="drawer-desc">Product description goes here.</p>
+        </div>
+        <div class="drawer-configurator">
+          <span class="section-label">Configure Specs</span>
+          <div class="configurator-row">
+            <span class="config-label">Material</span>
+            <span class="config-val" id="drawer-material">Stainless Steel</span>
+          </div>
+          <div class="configurator-row">
+            <span class="config-label">Finish</span>
+            <div class="config-selectors" id="drawer-finish-select"></div>
+          </div>
+          <div class="configurator-row">
+            <span class="config-label">Color</span>
+            <div class="config-selectors" id="drawer-color-select"></div>
+          </div>
+          <div class="configurator-row">
+            <span class="config-label">Size</span>
+            <div class="config-selectors" id="drawer-size-select"></div>
+          </div>
+          <div class="configurator-row">
+            <span class="config-label">Application</span>
+            <div class="config-selectors" id="drawer-app-select"></div>
+          </div>
+        </div>
+        <a href="#" class="action-trigger-btn primary whatsapp-cta" id="whatsapp-inquiry-btn" target="_blank">
+          <div class="whatsapp-btn-content">
+            <span class="whatsapp-icon"></span>
+            <span>Inquire on WhatsApp</span>
+          </div>
+        </a>
+        <p class="whatsapp-note">Clicking will open WhatsApp chat with pre-filled product specs configuration.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Technical Spec Sheets Request Modal -->
+  <div class="spec-modal-overlay" id="spec-modal">
+    <div class="spec-modal glass-panel">
+      <button class="close-modal-btn" id="close-modal">&times;</button>
+      <h3 class="modal-title">Request Specs</h3>
+      <p class="modal-desc">Download complete technical specification drawings, product dimensions, and CAD blueprints.</p>
+      <div class="modal-file-info">
+        <div class="file-icon"></div>
+        <div class="file-details">
+          <span class="file-name" id="modal-spec-filename">MANTIS_Kronos_PullHandle_Technical.pdf</span>
+          <span class="file-size">4.2 MB • PDF Format</span>
+        </div>
+      </div>
+      <button class="modal-confirm-btn" id="modal-confirm-btn">Download Blueprint</button>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+
+  <!-- Fallback to hide loading screen -->
+  <script>
+    // Auto-hide loading screen after 2 seconds if main.js fails
+    setTimeout(function () {
+      var loader = document.getElementById('loading-screen');
+      if (loader && loader.style.display !== 'none') {
+        console.log('Fallback: hiding loading screen');
+        loader.style.opacity = '0';
+        setTimeout(function () {
+          loader.style.display = 'none';
+        }, 600);
+      }
+    }, 2000);
+  </script>
+</body>
+
+</html>
