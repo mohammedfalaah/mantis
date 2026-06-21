@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { gsap } from 'gsap'
 import Header from '../components/layout/Header'
+import Footer from '../components/layout/Footer'
 
 const AboutPage = () => {
   const [tiltStyle, setTiltStyle] = useState({ transform: 'rotateX(0deg) rotateY(0deg) scale(1)' })
@@ -172,6 +173,8 @@ const AboutPage = () => {
           </div>
         </div>
       </main>
+
+      <Footer />
     </>
   )
 }

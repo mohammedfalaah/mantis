@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Header from '../components/layout/Header'
+import Footer from '../components/layout/Footer'
 import FeaturedProducts from '../components/products/FeaturedProducts'
 import { PRODUCTS } from '../../src/products/catalogData'
 
@@ -513,6 +514,7 @@ const HomePage = () => {
             </div>
           </div>
         </section>
+        <Footer />
       </main>
     </>
   )

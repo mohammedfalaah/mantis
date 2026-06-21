@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { gsap } from 'gsap'
 import Header from '../components/layout/Header'
+import Footer from '../components/layout/Footer'
 
 const ContactPage = () => {
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -157,6 +158,8 @@ const ContactPage = () => {
           </div>
         </div>
       </main>
+
+      <Footer />
     </>
   )
 }

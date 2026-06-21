@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useProducts } from '../contexts/ProductContext'
 import Header from '../components/layout/Header'
+import Footer from '../components/layout/Footer'
 import CategorySidebar from '../components/products/CategorySidebar'
 import FilterPanel from '../components/products/FilterPanel'
 import ProductGrid from '../components/products/ProductGrid'
@@ -91,6 +92,7 @@ const ShopPage = () => {
         </div>
       </main>
 
+      <Footer />
       <ProductDrawer />
     </>
   )
