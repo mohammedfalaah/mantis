@@ -38,6 +38,22 @@ const HomePage = () => {
     // Trigger entrance animations immediately
     triggerHeroEntrance()
 
+    // Scroll-triggered slide-in for the About section image
+    gsap.fromTo('#lever-gallery .image-column', 
+      { opacity: 0, x: 120 },
+      {
+        opacity: 1,
+        x: 0,
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '#lever-gallery',
+          start: 'top 75%',
+          toggleActions: 'play none none none'
+        }
+      }
+    )
+
     // Initialize scroll animations
     const sections = document.querySelectorAll('.scroll-section')
     const navItems = document.querySelectorAll('.nav-item')

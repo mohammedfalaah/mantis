@@ -2411,3 +2411,9 @@ body {
     display: none !important;
   }
 }
+
+/* --- Scroll-triggered Entrance Animations --- */
+#lever-gallery .image-column {
+  opacity: 0;
+  transform: translateX(120px); /* Pre-shift right for entrance slide-in */
+}
