@@ -85,14 +85,12 @@ const Header = () => {
   }
 
   const handleHomeClick = (e) => {
-    e.preventDefault()
     if (location.pathname === '/') {
+      e.preventDefault()
       window.scrollTo({ top: 0, behavior: 'smooth' })
       navigate('/')
-    } else {
-      navigate('/')
-      window.scrollTo(0, 0) // Ensure we start at the top of the homepage
     }
+    // On subpages like /shop, we let the default <a> tag native redirection take place for 100% reliability
   }
 
   const handleAnchorClick = (e, targetId) => {
@@ -123,23 +121,23 @@ const Header = () => {
       </div>
 
       <header className="global-header" style={{ opacity: 1, display: 'flex' }}>
-        <Link to="/" className="logo" style={{ opacity: 1 }} onClick={handleHomeClick}>
+        <a href="/" className="logo" style={{ opacity: 1 }} onClick={handleHomeClick}>
           <img 
             style={{ height: '80px' }} 
             src="/Screenshot_2026-06-17_at_1.32.38_PM-removebg-preview.png" 
             alt="MANTIS" 
           />
-        </Link>
+        </a>
         
         <nav className="nav-links" style={{ opacity: 1, display: 'flex' }}>
-          <Link 
-            to="/" 
+          <a 
+            href="/" 
             className={`nav-item ${isActive('/') && !location.hash ? 'active' : ''}`}
             data-sec="hero"
             onClick={handleHomeClick}
           >
             Home
-          </Link>
+          </a>
           
           <div 
             className="nav-item-dropdown"
@@ -176,8 +174,8 @@ const Header = () => {
         onTouchEnd={handleTouchEnd}
         onTouchMove={handleTouchMove}
       >
-        <Link 
-          to="/" 
+        <a 
+          href="/" 
           className={`mobile-nav-item ${isActive('/') && !location.hash ? 'active' : ''}`}
           data-index={0}
           onClick={handleHomeClick}
@@ -185,7 +183,7 @@ const Header = () => {
           <svg className="mobile-nav-icon" viewBox="0 0 24 24">
             <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
           </svg>
-        </Link>
+        </a>
         
         <Link 
           to="/shop" 
