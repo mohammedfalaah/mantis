@@ -107,6 +107,21 @@ const Header = () => {
 
   return (
     <>
+      {/* Mobile Top Announcement Bar (Looping Ticker) */}
+      <div className="mobile-top-announcement">
+        <div className="announcement-track">
+          <span>Order Now</span>
+          <span>Order Now</span>
+          <span>Order Now</span>
+          <span>Order Now</span>
+          {/* Duplicate items for seamless loop */}
+          <span>Order Now</span>
+          <span>Order Now</span>
+          <span>Order Now</span>
+          <span>Order Now</span>
+        </div>
+      </div>
+
       <header className="global-header" style={{ opacity: 1, display: 'flex' }}>
         <Link to="/" className="logo" style={{ opacity: 1 }} onClick={handleHomeClick}>
           <img 

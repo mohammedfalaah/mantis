@@ -578,3 +578,9 @@
   }
 }
 
+@media (max-width: 768px) {
+  .shop-page {
+    padding-top: 116px !important; /* Offset for top fixed announcement bar */
+  }
+}
+
