@@ -24,7 +24,14 @@ const Header = () => {
 
   const navigateToIndex = (index) => {
     const target = targets[index]
-    if (target.pathname === '/' && target.hash) {
+    if (index === 0) {
+      if (location.pathname === '/') {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+        navigate('/')
+      } else {
+        navigate('/')
+      }
+    } else if (target.pathname === '/' && target.hash) {
       if (location.pathname !== '/') {
         navigate('/' + target.hash)
       } else {
@@ -59,6 +66,14 @@ const Header = () => {
     }
   }
 
+  const handleHomeClick = (e) => {
+    if (location.pathname === '/') {
+      e.preventDefault()
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      navigate('/')
+    }
+  }
+
   const handleAnchorClick = (e, targetId) => {
     if (location.pathname === '/') {
       e.preventDefault()
@@ -72,7 +87,7 @@ const Header = () => {
   return (
     <>
       <header className="global-header" style={{ opacity: 1, display: 'flex' }}>
-        <Link to="/" className="logo" style={{ opacity: 1 }}>
+        <Link to="/" className="logo" style={{ opacity: 1 }} onClick={handleHomeClick}>
           <img 
             style={{ height: '80px' }} 
             src="/Screenshot_2026-06-17_at_1.32.38_PM-removebg-preview.png" 
@@ -83,8 +98,9 @@ const Header = () => {
         <nav className="nav-links" style={{ opacity: 1, display: 'flex' }}>
           <Link 
             to="/" 
-            className={`nav-item ${isActive('/') ? 'active' : ''}`}
+            className={`nav-item ${isActive('/') && !location.hash ? 'active' : ''}`}
             data-sec="hero"
+            onClick={handleHomeClick}
           >
             Home
           </Link>
@@ -110,11 +126,11 @@ const Header = () => {
             )}
           </div>
           
-          <a href="#about" className="nav-item" data-sec="about">About</a>
-          <a href="#contact" className="nav-item" data-sec="contact">Contact</a>
+          <a href="/#about" className="nav-item" data-sec="about" onClick={(e) => handleAnchorClick(e, '#about')}>About</a>
+          <a href="/#contact" className="nav-item" data-sec="contact" onClick={(e) => handleAnchorClick(e, '#contact')}>Contact</a>
         </nav>
         
-        <a href="#contact" className="header-cta" style={{ opacity: 1 }}>Inquire</a>
+        <a href="/#contact" className="header-cta" style={{ opacity: 1 }} onClick={(e) => handleAnchorClick(e, '#contact')}>Inquire</a>
       </header>
 
       {/* Mobile Glass Bottom Navigation Dock */}
@@ -123,6 +139,7 @@ const Header = () => {
           to="/" 
           className={`mobile-nav-item ${isActive('/') && !location.hash ? 'active' : ''}`}
           data-index={0}
+          onClick={handleHomeClick}
         >
           <svg className="mobile-nav-icon" viewBox="0 0 24 24">
             <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
