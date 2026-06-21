@@ -2440,8 +2440,8 @@ body {
     display: flex;
   }
   
-  /* Hide the top CTA inquire button in mobile header */
-  .global-header .header-cta {
-    display: none;
+  /* Hide the entire top header on mobile since the mobile bottom nav handles it */
+  .global-header {
+    display: none !important;
   }
 }
