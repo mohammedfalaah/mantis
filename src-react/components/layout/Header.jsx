@@ -67,10 +67,13 @@ const Header = () => {
   }
 
   const handleHomeClick = (e) => {
+    e.preventDefault()
     if (location.pathname === '/') {
-      e.preventDefault()
       window.scrollTo({ top: 0, behavior: 'smooth' })
       navigate('/')
+    } else {
+      navigate('/')
+      window.scrollTo(0, 0) // Ensure we start at the top of the homepage
     }
   }
 
