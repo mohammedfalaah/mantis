@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const [touchStartPos, setTouchStartPos] = useState(null)
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -30,6 +31,7 @@ const Header = () => {
         navigate('/')
       } else {
         navigate('/')
+        window.scrollTo(0, 0)
       }
     } else if (target.pathname === '/' && target.hash) {
       if (location.pathname !== '/') {
@@ -46,20 +48,36 @@ const Header = () => {
     }
   }
 
-  const handleTouchMove = (e) => {
-    if (e.cancelable) {
-      e.preventDefault() // Stop page scroll while dragging over nav bar
-    }
+  const handleTouchStart = (e) => {
     const touch = e.touches[0]
-    const element = document.elementFromPoint(touch.clientX, touch.clientY)
-    if (element) {
-      const navItem = element.closest('.mobile-nav-item')
-      if (navItem) {
-        const indexAttr = navItem.getAttribute('data-index')
-        if (indexAttr !== null) {
-          const index = parseInt(indexAttr, 10)
-          if (index !== getCurrentIndex()) {
-            navigateToIndex(index)
+    setTouchStartPos({ x: touch.clientX, y: touch.clientY })
+  }
+
+  const handleTouchEnd = () => {
+    setTouchStartPos(null)
+  }
+
+  const handleTouchMove = (e) => {
+    if (!touchStartPos) return
+    const touch = e.touches[0]
+    const diffX = Math.abs(touch.clientX - touchStartPos.x)
+    const diffY = Math.abs(touch.clientY - touchStartPos.y)
+
+    // Only capture navigation scrubbing if finger moves more than 10px to avoid canceling tap clicks
+    if (diffX > 10 || diffY > 10) {
+      if (e.cancelable) {
+        e.preventDefault() // Stop page scroll while dragging over nav bar
+      }
+      const element = document.elementFromPoint(touch.clientX, touch.clientY)
+      if (element) {
+        const navItem = element.closest('.mobile-nav-item')
+        if (navItem) {
+          const indexAttr = navItem.getAttribute('data-index')
+          if (indexAttr !== null) {
+            const index = parseInt(indexAttr, 10)
+            if (index !== getCurrentIndex()) {
+              navigateToIndex(index)
+            }
           }
         }
       }
@@ -137,7 +155,12 @@ const Header = () => {
       </header>
 
       {/* Mobile Glass Bottom Navigation Dock */}
-      <nav className="mobile-bottom-nav" onTouchMove={handleTouchMove}>
+      <nav 
+        className="mobile-bottom-nav" 
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        onTouchMove={handleTouchMove}
+      >
         <Link 
           to="/" 
           className={`mobile-nav-item ${isActive('/') && !location.hash ? 'active' : ''}`}
