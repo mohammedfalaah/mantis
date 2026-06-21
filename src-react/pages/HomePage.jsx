@@ -89,10 +89,29 @@ const HomePage = () => {
   }, [])
 
   const triggerHeroEntrance = () => {
-    gsap.from('.hero-left .tagline', { opacity: 0, y: 10, duration: 0.6, ease: 'power2.out', delay: 0.2 })
-    gsap.from('.hero-left .hero-title', { opacity: 0, y: 15, duration: 0.8, ease: 'power2.out', delay: 0.3 })
-    gsap.from('.hero-left .hero-desc', { opacity: 0, y: 10, duration: 0.6, ease: 'power2.out', delay: 0.4 })
-    gsap.from('.global-header', { opacity: 0, duration: 0.8, ease: 'power2.out', delay: 0.3 })
+    // Slide in title lines from the left side
+    gsap.fromTo('.text-line span', 
+      { opacity: 0, x: -80 }, 
+      { opacity: 1, x: 0, duration: 1.0, ease: 'power3.out', stagger: 0.18, delay: 0.1 }
+    )
+    
+    // Slide in subtitle lines from the left side
+    gsap.fromTo('.subtitle-line', 
+      { opacity: 0, x: -50 }, 
+      { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out', stagger: 0.12, delay: 0.45 }
+    )
+
+    // Slide up CTA buttons
+    gsap.fromTo('.hero-cta-section', 
+      { opacity: 0, y: 20 }, 
+      { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', delay: 0.75 }
+    )
+
+    // Fade in the global header
+    gsap.fromTo('.global-header', 
+      { opacity: 0 }, 
+      { opacity: 1, duration: 0.8, ease: 'power2.out', delay: 0.3 }
+    )
   }
 
   return (
