@@ -511,7 +511,14 @@ body {
 
 @media (max-width: 768px) {
   .hero-main-title {
-    font-size: 2rem;
+    font-size: 2.6rem; /* Increased for premium prominence */
+    line-height: 1.3;
+  }
+
+  .hero-subtitle {
+    font-size: 1.15rem; /* Increased for high-contrast readability */
+    line-height: 1.7;
+    margin-top: 12px;
   }
 
   .hero-banner-overlay {
