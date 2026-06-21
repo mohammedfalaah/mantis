@@ -85,21 +85,26 @@ const Header = () => {
   }
 
   const handleHomeClick = (e) => {
+    e.preventDefault()
     if (location.pathname === '/') {
-      e.preventDefault()
       window.scrollTo({ top: 0, behavior: 'smooth' })
       navigate('/')
+    } else {
+      navigate('/')
+      window.scrollTo(0, 0)
     }
-    // On subpages like /shop, we let the default <a> tag native redirection take place for 100% reliability
   }
 
   const handleAnchorClick = (e, targetId) => {
+    e.preventDefault()
     if (location.pathname === '/') {
-      e.preventDefault()
       const target = document.querySelector(targetId)
       if (target) {
         target.scrollIntoView({ behavior: 'smooth' })
       }
+      navigate(targetId)
+    } else {
+      navigate('/' + targetId)
     }
   }
 

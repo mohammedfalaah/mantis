@@ -2420,15 +2420,19 @@ body {
   }
 }
 
-/* --- Scroll-triggered Entrance Animations --- */
-#lever-gallery .image-column {
+/* --- Scroll-triggered Entrance Animations Initial States --- */
+#lever-gallery .content-column,
+#smart-tech .image-column,
+#contact .content-column {
   opacity: 0;
-  transform: translateX(120px); /* Pre-shift right for entrance slide-in */
+  transform: translateX(-80px);
 }
 
-#smart-tech .content-column {
+#lever-gallery .image-column,
+#smart-tech .content-column,
+#contact .image-column {
   opacity: 0;
-  transform: translateX(120px); /* Pre-shift right for entrance slide-in */
+  transform: translateX(80px);
 }
 
 /* --- Mobile Top Announcement Bar (Marquee Loop) --- */

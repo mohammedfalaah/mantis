@@ -10,6 +10,11 @@ gsap.registerPlugin(ScrollTrigger)
 
 const HomePage = () => {
   const [tiltStyle, setTiltStyle] = useState({ transform: 'rotateX(0deg) rotateY(0deg) scale(1)' })
+  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [contactName, setContactName] = useState('')
+  const [contactEmail, setContactEmail] = useState('')
+  const [contactMessage, setContactMessage] = useState('')
+  const [referenceId, setReferenceId] = useState('')
 
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect()
@@ -34,13 +39,61 @@ const HomePage = () => {
     })
   }
 
+  const handleContactSubmit = (e) => {
+    e.preventDefault()
+    const randomId = Math.floor(100000 + Math.random() * 900000)
+    setReferenceId(randomId.toString())
+    
+    const card = document.querySelector('.contact-card')
+    gsap.to(card, {
+      opacity: 0,
+      y: 10,
+      duration: 0.3,
+      onComplete: () => {
+        setIsSubmitted(true)
+        gsap.to(card, {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          ease: 'power2.out'
+        })
+      }
+    })
+  }
+
   useEffect(() => {
     // Trigger entrance animations immediately
     triggerHeroEntrance()
 
-    // Scroll-triggered slide-in for the About section image
+    // Hero image parallax scroll animation
+    gsap.to('.hero-banner-image img', {
+      yPercent: 15,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true
+      }
+    })
+
+    // Scroll-triggered split-reveal for About section
+    gsap.fromTo('#lever-gallery .content-column', 
+      { opacity: 0, x: -80 },
+      {
+        opacity: 1,
+        x: 0,
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '#lever-gallery',
+          start: 'top 75%',
+          toggleActions: 'play none none none'
+        }
+      }
+    )
     gsap.fromTo('#lever-gallery .image-column', 
-      { opacity: 0, x: 120 },
+      { opacity: 0, x: 80 },
       {
         opacity: 1,
         x: 0,
@@ -54,9 +107,9 @@ const HomePage = () => {
       }
     )
 
-    // Scroll-triggered slide-in for the Smart Technology section text
-    gsap.fromTo('#smart-tech .content-column', 
-      { opacity: 0, x: 120 },
+    // Scroll-triggered split-reveal for Smart Technology section
+    gsap.fromTo('#smart-tech .image-column', 
+      { opacity: 0, x: -80 },
       {
         opacity: 1,
         x: 0,
@@ -64,6 +117,50 @@ const HomePage = () => {
         ease: 'power3.out',
         scrollTrigger: {
           trigger: '#smart-tech',
+          start: 'top 75%',
+          toggleActions: 'play none none none'
+        }
+      }
+    )
+    gsap.fromTo('#smart-tech .content-column', 
+      { opacity: 0, x: 80 },
+      {
+        opacity: 1,
+        x: 0,
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '#smart-tech',
+          start: 'top 75%',
+          toggleActions: 'play none none none'
+        }
+      }
+    )
+
+    // Scroll-triggered split-reveal for Contact section
+    gsap.fromTo('#contact .content-column', 
+      { opacity: 0, x: -80 },
+      {
+        opacity: 1,
+        x: 0,
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '#contact',
+          start: 'top 75%',
+          toggleActions: 'play none none none'
+        }
+      }
+    )
+    gsap.fromTo('#contact .image-column', 
+      { opacity: 0, x: 80 },
+      {
+        opacity: 1,
+        x: 0,
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '#contact',
           start: 'top 75%',
           toggleActions: 'play none none none'
         }
@@ -259,6 +356,64 @@ const HomePage = () => {
                   </Link>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Section */}
+        <section id="contact" className="scroll-section">
+          <div className="section-content split-grid">
+            <div className="content-column">
+              <div className="interactive-card glass-panel contact-card">
+                {!isSubmitted ? (
+                  <>
+                    <div className="card-tag">Get in Touch</div>
+                    <h2 className="card-title">Inquire for Projects</h2>
+                    <form className="contact-form" onSubmit={handleContactSubmit}>
+                      <div className="form-group">
+                        <input 
+                          type="text" 
+                          placeholder="Your Name" 
+                          required 
+                          value={contactName}
+                          onChange={(e) => setContactName(e.target.value)}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <input 
+                          type="email" 
+                          placeholder="Your Email" 
+                          required 
+                          value={contactEmail}
+                          onChange={(e) => setContactEmail(e.target.value)}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <textarea 
+                          rows="4" 
+                          placeholder="Describe your project requirements..."
+                          required
+                          value={contactMessage}
+                          onChange={(e) => setContactMessage(e.target.value)}
+                        ></textarea>
+                      </div>
+                      <button type="submit" className="card-action-btn">Submit Inquiry</button>
+                    </form>
+                  </>
+                ) : (
+                  <>
+                    <div className="card-tag">Inquiry Received</div>
+                    <h2 className="card-title">Thank You</h2>
+                    <p className="card-desc">
+                      Your inquiry has been successfully transmitted to Mantis Studio. One of our architectural design consultants will review your specifications and contact you within 24 hours.
+                    </p>
+                    <div className="micro-note" style={{ color: '#f39a35', fontWeight: 600 }}>Reference ID: MNT-{referenceId}</div>
+                  </>
+                )}
+              </div>
+            </div>
+            <div className="image-column">
+              <img src="/ChatGPT Image Jun 20, 2026, 04_06_31 PM.png" alt="Mantis Project Inquiry" />
             </div>
           </div>
         </section>
