@@ -78,8 +78,7 @@ const Header = () => {
     if (location.pathname === '/') {
       window.scrollTo({ top: 0, behavior: 'smooth' })
     } else {
-      navigate('/')
-      window.scrollTo(0, 0)
+      window.location.href = '/'
     }
   }
 
