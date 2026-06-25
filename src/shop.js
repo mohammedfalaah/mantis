@@ -233,7 +233,9 @@ function renderProducts() {
     card.addEventListener('click', () => {
       const id = card.dataset.id;
       const product = PRODUCTS.find(p => p.id === id);
-      if (product) openProductDrawer(product);
+      if (product) {
+  window.location.href = `product.html?id=${id}`;
+}
     });
   });
 }

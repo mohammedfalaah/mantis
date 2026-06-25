@@ -223,7 +223,9 @@ function initUI() {
       if (productType === 'lever') productId = 'lever-handle-ss-01';
       
       const product = PRODUCTS.find(p => p.id === productId);
-      if (product) openProductDrawer(product);
+      if (product) {
+  window.location.href = `product.html?id=${product.id}`;
+}
     });
   });
 
@@ -559,7 +561,7 @@ function initFeaturedProducts() {
       const productId = card.dataset.productId;
       const product = PRODUCTS.find(p => p.id === productId);
       if (product) {
-        openProductDrawer(product);
+        window.location.href = `product.html?id=${id}`;
       }
     });
   });

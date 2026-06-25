@@ -17,7 +17,7 @@
   font-size: 3rem;
   font-weight: 600;
   margin-bottom: 12px;
-  color: var(--color-text-primary);
+  color: #313e31;
 }
 
 .shop-subtitle {
@@ -282,7 +282,7 @@
 
 .product-category {
   font-size: 0.7rem;
-  color: var(--color-text-muted);
+  color: #f39a35;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   display: block;
@@ -306,7 +306,7 @@
   width: 100%;
   padding: 12px;
   background: var(--color-text-primary);
-  color: var(--color-bg-deep);
+  color: #f39a35;
   border: none;
   font-size: 0.85rem;
   font-weight: 600;
