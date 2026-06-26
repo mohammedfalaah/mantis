@@ -277,43 +277,6 @@ function setupEvents() {
       renderProducts();
     });
   }
-  
-  // Close drawer
-  const closeBtn = document.getElementById('close-drawer-btn');
-  const overlay = document.getElementById('product-drawer-overlay');
-  
-  if (closeBtn) closeBtn.addEventListener('click', closeProductDrawer);
-  if (overlay) {
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) closeProductDrawer();
-    });
-  }
-}
-
-// Open product drawer
-function openProductDrawer(product) {
-  const overlay = document.getElementById('product-drawer-overlay');
-  
-  document.getElementById('drawer-category').textContent = product.category;
-  document.getElementById('drawer-title').textContent = product.name;
-  document.getElementById('drawer-subcategory').textContent = product.subcategory;
-  document.getElementById('drawer-desc').textContent = product.description;
-  document.getElementById('drawer-material').textContent = product.material;
-  document.getElementById('drawer-finishes').textContent = product.finishes.join(', ');
-  document.getElementById('drawer-colors').textContent = product.colors.join(', ');
-  document.getElementById('drawer-sizes').textContent = product.sizes.join(', ');
-  
-  const drawerImage = document.getElementById('drawer-image');
-  drawerImage.src = product.image;
-  drawerImage.alt = product.name;
-  
-  overlay.classList.add('active');
-}
-
-// Close product drawer
-function closeProductDrawer() {
-  const overlay = document.getElementById('product-drawer-overlay');
-  overlay.classList.remove('active');
 }
 
 // Start

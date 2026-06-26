@@ -387,7 +387,7 @@ body {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  filter: invert(1) hue-rotate(180deg) brightness(0.75) contrast(1.1);
+  filter: invert(1) hue-rotate(180deg) brightness(-1.75) contrast(1.1);
   mix-blend-mode: lighten;
 }
 

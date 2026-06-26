@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { Link } from 'react-router-dom'
 import { PRODUCTS } from '../../../src/products/catalogData'
@@ -6,6 +7,7 @@ import { PRODUCTS } from '../../../src/products/catalogData'
 const FeaturedProducts = () => {
   const sectionRef = useRef(null)
   const animatedRef = useRef(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     // Select 6 featured products
@@ -118,7 +120,11 @@ const FeaturedProducts = () => {
               key={product.id}
               className="featured-product-card" 
               data-product-id={product.id}
-              style={{ opacity: 0, transform: 'translateY(30px)' }}
+              style={{ opacity: 0, transform: 'translateY(30px)', cursor: 'pointer' }}
+              onClick={() => {
+                // Navigate to product detail page using React Router
+                navigate(`/product/${product.id}`)
+              }}
             >
               <div className="featured-product-image">
                 <img src={product.image} alt={product.name} loading="lazy" />

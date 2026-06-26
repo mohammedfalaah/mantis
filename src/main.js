@@ -812,16 +812,16 @@ function setupCatalogEvents() {
     });
   }
   
-  // Drawer close events
-  const closeBtn = document.getElementById('close-drawer-btn');
-  const overlay = document.getElementById('product-drawer-overlay');
+  // Drawer functionality removed - products now navigate to dedicated page
+  // const closeBtn = document.getElementById('close-drawer-btn');
+  // const overlay = document.getElementById('product-drawer-overlay');
   
-  if (closeBtn) closeBtn.addEventListener('click', closeProductDrawer);
-  if (overlay) {
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) closeProductDrawer();
-    });
-  }
+  // if (closeBtn) closeBtn.addEventListener('click', closeProductDrawer);
+  // if (overlay) {
+  //   overlay.addEventListener('click', (e) => {
+  //     if (e.target === overlay) closeProductDrawer();
+  //   });
+  // }
   
   // Support cursor hovers on catalog dynamic elements
   document.addEventListener('mouseover', (e) => {
@@ -925,13 +925,15 @@ function renderCatalog() {
   grid.querySelectorAll('.product-card').forEach(card => {
     card.addEventListener('click', () => {
       const id = card.dataset.id;
-      const product = PRODUCTS.find(p => p.id === id);
-      if (product) openProductDrawer(product);
+      // Navigate to product detail page instead of opening drawer
+      window.location.href = `/product.html?id=${id}`;
     });
   });
 }
 
-// Product specs drawer interactions
+// Product drawer functions removed - products now navigate to /product.html?id={id}
+// Keeping the function definitions commented out in case needed for reference
+/*
 function openProductDrawer(product) {
   activeDrawerProduct = product;
   
@@ -1008,7 +1010,9 @@ function openProductDrawer(product) {
   
   updateWhatsAppLink();
 }
+*/
 
+/*
 function closeProductDrawer() {
   const overlay = document.getElementById('product-drawer-overlay');
   if (overlay) overlay.classList.remove('active');
@@ -1047,7 +1051,7 @@ Please provide catalog details, lead time, and pricing quotation for my project.
   
   console.log('WhatsApp link updated for product:', activeDrawerProduct.name);
 }
-
+*/
 // Start everything when DOM is loaded
 window.addEventListener('DOMContentLoaded', init);
 

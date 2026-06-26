@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useProducts } from '../contexts/ProductContext'
 import Header from '../components/layout/Header'
@@ -6,7 +6,7 @@ import Footer from '../components/layout/Footer'
 import CategorySidebar from '../components/products/CategorySidebar'
 import FilterPanel from '../components/products/FilterPanel'
 import ProductGrid from '../components/products/ProductGrid'
-import ProductDrawer from '../components/products/ProductDrawer'
+// import ProductDrawer from '../components/products/ProductDrawer' // Removed - using dedicated product page
 import '../../src/shop.css'
 
 const ShopPage = () => {
@@ -14,8 +14,12 @@ const ShopPage = () => {
   const [isFiltersOpen, setIsFiltersOpen] = useState(false)
   const { catalogState, setCategory, setSearchQuery, setSortBy, getFilteredProducts } = useProducts()
   const filteredProducts = getFilteredProducts()
+  const hasSetCategory = useRef(false)
 
   useEffect(() => {
+    // Only set category once to avoid infinite loop
+    if (hasSetCategory.current) return
+    
     const categoryParam = searchParams.get('category')
     if (categoryParam) {
       const categoryMap = {
@@ -30,7 +34,9 @@ const ShopPage = () => {
     } else {
       setCategory(null)
     }
-  }, [searchParams, setCategory])
+    
+    hasSetCategory.current = true
+  }, [searchParams])
 
   return (
     <>
@@ -93,7 +99,7 @@ const ShopPage = () => {
       </main>
 
       <Footer />
-      <ProductDrawer />
+      {/* ProductDrawer removed - products now navigate to /product.html */}
     </>
   )
 }
