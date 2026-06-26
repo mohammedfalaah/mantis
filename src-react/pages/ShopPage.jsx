@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { gsap } from 'gsap'
 import { useProducts } from '../contexts/ProductContext'
 import Header from '../components/layout/Header'
 import Footer from '../components/layout/Footer'
@@ -15,6 +16,8 @@ const ShopPage = () => {
   const { catalogState, setCategory, setSearchQuery, setSortBy, getFilteredProducts } = useProducts()
   const filteredProducts = getFilteredProducts()
   const hasSetCategory = useRef(false)
+  const shopMainRef = useRef(null)
+  const hasAnimated = useRef(false)
 
   useEffect(() => {
     // Only set category once to avoid infinite loop
@@ -37,6 +40,76 @@ const ShopPage = () => {
     
     hasSetCategory.current = true
   }, [searchParams])
+
+  useEffect(() => {
+    // Animate shop elements on mount
+    if (hasAnimated.current) return
+    hasAnimated.current = true
+
+    const tl = gsap.timeline()
+    
+    // Animate hero section
+    tl.from('.shop-title', {
+      opacity: 0,
+      y: 30,
+      duration: 0.8,
+      ease: 'power3.out'
+    })
+    .from('.shop-subtitle', {
+      opacity: 0,
+      y: 20,
+      duration: 0.6,
+      ease: 'power2.out'
+    }, '-=0.4')
+    
+    // Animate sidebar
+    .from('.shop-sidebar', {
+      opacity: 0,
+      x: -30,
+      duration: 0.6,
+      ease: 'power2.out'
+    }, '-=0.3')
+    
+    // Animate controls
+    .from('.shop-controls', {
+      opacity: 0,
+      y: 20,
+      duration: 0.5,
+      ease: 'power2.out'
+    }, '-=0.4')
+    
+    // Animate results count
+    .from('.shop-results', {
+      opacity: 0,
+      duration: 0.4,
+      ease: 'power2.out'
+    }, '-=0.2')
+
+  }, [])
+
+  useEffect(() => {
+    // Animate product cards when they change
+    const productCards = document.querySelectorAll('.product-card')
+    
+    if (productCards.length > 0) {
+      gsap.fromTo(productCards,
+        {
+          opacity: 0,
+          y: 30,
+          scale: 0.95
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.5,
+          stagger: 0.05,
+          ease: 'power2.out',
+          clearProps: 'all'
+        }
+      )
+    }
+  }, [filteredProducts])
 
   return (
     <>
