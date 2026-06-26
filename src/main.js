@@ -224,8 +224,8 @@ function initUI() {
       
       const product = PRODUCTS.find(p => p.id === productId);
       if (product) {
-  window.location.href = `product.html?id=${product.id}`;
-}
+        window.location.href = `product.html?id=${product.id}`;
+      }
     });
   });
 

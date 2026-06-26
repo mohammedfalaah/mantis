@@ -234,8 +234,8 @@ function renderProducts() {
       const id = card.dataset.id;
       const product = PRODUCTS.find(p => p.id === id);
       if (product) {
-  window.location.href = `product.html?id=${id}`;
-}
+        window.location.href = `product.html?id=${id}`;
+      }
     });
   });
 }
