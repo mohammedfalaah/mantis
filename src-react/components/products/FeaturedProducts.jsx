@@ -10,13 +10,13 @@ const FeaturedProducts = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    // Select 6 featured products
-    const featuredIds = ['p-01', 'm-03', 'h-02', 'p-03', 'dc-01', 'da-03']
+    // Select 4 featured products only
+    const featuredIds = ['p-01', 'm-03', 'h-02', 'p-03']
     const featuredProducts = featuredIds
       .map(id => PRODUCTS.find(p => p.id === id))
       .filter(Boolean)
 
-    const productsToShow = featuredProducts.length >= 6 ? featuredProducts : PRODUCTS.slice(0, 6)
+    const productsToShow = featuredProducts.length >= 4 ? featuredProducts.slice(0, 4) : PRODUCTS.slice(0, 4)
 
     // Set up Intersection Observer
     const observer = new IntersectionObserver((entries) => {
@@ -77,11 +77,11 @@ const FeaturedProducts = () => {
     return () => observer.disconnect()
   }, [])
 
-  const featuredIds = ['p-01', 'm-03', 'h-02', 'p-03', 'dc-01', 'da-03']
+  const featuredIds = ['p-01', 'm-03', 'h-02', 'p-03']
   const featuredProducts = featuredIds
     .map(id => PRODUCTS.find(p => p.id === id))
     .filter(Boolean)
-  const productsToShow = featuredProducts.length >= 6 ? featuredProducts : PRODUCTS.slice(0, 6)
+  const productsToShow = featuredProducts.length >= 4 ? featuredProducts.slice(0, 4) : PRODUCTS.slice(0, 4)
 
   return (
     <section id="featured-products" className="scroll-section featured-section" ref={sectionRef}>

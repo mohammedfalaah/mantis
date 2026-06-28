@@ -340,11 +340,11 @@ body {
 
 .scroll-section {
   width: 100%;
-  height: 100vh;
+  min-height: 70vh;
   position: relative;
   display: flex;
   align-items: center;
-  padding: 0 10%;
+  padding: 60px 10%;
   pointer-events: none;
   /* Let user rotate scene if not over cards */
 }
@@ -2063,7 +2063,8 @@ body {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 32px;
+  padding: 40px 0;
 }
 
 .featured-header {
@@ -2112,9 +2113,22 @@ body {
 
 .featured-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 32px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
   width: 100%;
+}
+
+@media (max-width: 1200px) {
+  .featured-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .featured-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 }
 
 .featured-product-card {
@@ -2200,7 +2214,7 @@ body {
 .featured-btn-view-all {
   display: inline-block;
   padding: 14px 40px;
-  background: var(--color-text-primary);
+  background: rgba(0, 0, 0, 0.8);
   color: var(--color-bg-deep);
   font-size: 0.85rem;
   font-weight: 600;
@@ -2443,7 +2457,7 @@ body {
 
 /* --- Stats Section --- */
 .stats-section {
-  padding: 120px 0;
+  padding: 0px 0;
   background: transparent;
 }
 
